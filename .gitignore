@@ -1,0 +1,24 @@
+# Xcode (the project is generated from ios/project.yml)
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+build/
+*.xcresult
+
+# Swift
+.build/
+.swiftpm/
+
+# Node (tools/)
+node_modules/
+
+# Python (samples/)
+__pycache__/
+
+# macOS
+.DS_Store
+
+# Pulled capture bundles
+*.zip
+captures/
