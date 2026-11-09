@@ -6,7 +6,7 @@ Guidance for coding agents working in this repo, or using it as a reference for 
 
 A reference iOS capture app. It writes an Echo-3 capture bundle (posed JPEG keyframes with EXIF capture time, plus a trajectory and per-frame intrinsics) to local storage. The bundle holds only what Echo-3 requires; don't add files to it. It has no network code, no auth and no analytics on purpose. Keep it that way.
 
-The Echo-3 capture reference is the public [capture guide](https://docs.spaitial.ai/api/capture-worlds). `docs/bundle-format.md` summarizes the capture contract, and where they differ the capture guide wins. Bundles are submitted as a `capture_bundle` ZIP on `POST /v1/worlds`.
+The Echo-3 capture reference is the public [capture guide](https://docs.spaitial.ai/api/capture-worlds). `docs/bundle-format.md` summarizes the capture contract, and where they differ the capture guide wins.
 
 Start with [docs/architecture.md](docs/architecture.md) for the code map and [docs/bundle-format.md](docs/bundle-format.md) for the contract.
 

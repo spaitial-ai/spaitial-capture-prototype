@@ -6,7 +6,7 @@ The Echo-3 capture API is available to every SpAItial developer account. Its ref
 
 Use it as a reference when you build your own capture app. It has no accounts, no network calls and no analytics. Scans stay on the device until you export them.
 
-The app never submits anything. The exported zip is the `capture_bundle` input, and submission belongs in your backend. Send it as a `capture_bundle` ZIP on `POST /v1/worlds`, as described in the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-zip).
+The app never submits anything. The exported zip is the `capture_bundle` input, and submission belongs in your backend. See the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-zip).
 
 ## What it does
 
