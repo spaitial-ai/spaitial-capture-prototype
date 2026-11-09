@@ -2,7 +2,7 @@
 
 This page traces how an `ARFrame` becomes an `Image_%06d.jpg` plus a pose, and how a finished scan becomes a valid bundle. Each step names the file that implements it. Start with [architecture.md](architecture.md) for the module map.
 
-The capture rules come from the Echo-3 contract's "ARKit capture settings" section in the [beta docs](https://developers.spaitial.ai/docs/beta). The values below match it.
+The capture rules come from the Echo-3 contract's "ARKit capture settings" section in the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-arkit). The values below match it.
 
 ```mermaid
 flowchart TD

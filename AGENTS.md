@@ -6,7 +6,7 @@ Guidance for coding agents working in this repo, or using it as a reference for 
 
 A reference iOS capture app. It writes an Echo-3 capture bundle (posed JPEG keyframes with EXIF capture time, plus a trajectory and per-frame intrinsics) to local storage. The bundle holds only what Echo-3 requires; don't add files to it. It has no network code, no auth and no analytics on purpose. Keep it that way.
 
-Echo-3 capture is in private beta. Its reference is at [developers.spaitial.ai/docs/beta](https://developers.spaitial.ai/docs/beta) and needs a signed-in account with beta access. `docs/bundle-format.md` summarizes the capture contract, and where they differ the beta reference wins. If the user can't see the beta docs, point them to support@spaitial.ai.
+The Echo-3 capture reference is the public [capture guide](https://docs.spaitial.ai/api/capture-worlds). `docs/bundle-format.md` summarizes the capture contract, and where they differ the capture guide wins. Bundles are submitted as a `capture_bundle` ZIP on `POST /v1/worlds`.
 
 Start with [docs/architecture.md](docs/architecture.md) for the code map and [docs/bundle-format.md](docs/bundle-format.md) for the contract.
 
@@ -38,7 +38,7 @@ Breaking any of these produces bundles that either fail validation or, worse, pa
 - **Contiguous, one-based names.** `images/Image_000001.jpg` up to `Image_<frame_count>.jpg`, with no gaps.
 - **Index parity.** Image `i+1`, trajectory entry `i` and per-frame intrinsics entry `i` describe the same frame. The writer assigns an index only after the JPEG is on disk.
 - **One hold per scan.** Frames clearly in the other hold are not sampled (`CameraGeometry.isClearHoldMismatch`).
-- **Contract capture settings.** Gravity alignment, autofocus on, exposure left to ARKit, the 0.5 s settle gate, the 7 cm / 10° sampler and the 64 px blur gate all come from the beta reference. Don't tune them.
+- **Contract capture settings.** Gravity alignment, autofocus on, exposure left to ARKit, the 0.5 s settle gate, the 7 cm / 10° sampler and the 64 px blur gate all come from the capture guide. Don't tune them.
 - **At most 5,000 frames.**
 
 ## Keep these in sync

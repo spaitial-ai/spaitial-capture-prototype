@@ -2,7 +2,7 @@
 
 This is the bundle the prototype writes and Echo-3 accepts as `capture_bundle` input: ordered JPEG frames plus one camera pose and one pinhole calibration per frame, packaged as one ZIP. It is a posed image set, not a video.
 
-The authoritative contract is the private beta reference at [developers.spaitial.ai/docs/beta](https://developers.spaitial.ai/docs/beta). If you can't see it, email [support@spaitial.ai](mailto:support@spaitial.ai). This page summarizes it and notes where the prototype makes a choice. Where the two disagree, the beta reference wins.
+The authoritative contract is the [capture guide](https://docs.spaitial.ai/api/capture-worlds). This page summarizes it and notes where the prototype makes a choice. Where the two disagree, the capture guide wins.
 
 `samples/minimal-bundle/` is a complete 3-frame example. `tools/validate-bundle` checks a folder or a ZIP against this page.
 
@@ -130,4 +130,4 @@ If you do write `cameras/orientation.json`, it must hold one of those three valu
 | Per-frame intrinsics | yes | yes |
 | Hold orientation from the trajectory | written to the manifest | reported |
 
-Both validators report every problem at once, using the issue codes listed in the beta reference.
+Both validators report every problem at once, using the issue codes listed in the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-errors).

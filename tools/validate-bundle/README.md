@@ -2,7 +2,7 @@
 
 Checks an Echo-3 capture bundle against the capture contract before you send it. Pass it the exact ZIP you will send, or a bundle folder. It checks the ZIP structure, the layout, the EXIF capture times and the camera files, and lists every problem at once.
 
-The contract it checks is summarized in [docs/bundle-format.md](../../docs/bundle-format.md). The authoritative version is the private beta reference at [developers.spaitial.ai/docs/beta](https://developers.spaitial.ai/docs/beta).
+The contract it checks is summarized in [docs/bundle-format.md](../../docs/bundle-format.md). The authoritative version is the [capture guide](https://docs.spaitial.ai/api/capture-worlds).
 
 ## Run it
 
@@ -23,7 +23,7 @@ A folder is read the same way as a ZIP. One wrapper folder (such as the `bundle/
 
 ## What it checks
 
-Errors use the issue codes from the beta reference:
+Errors use the issue codes from the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-errors):
 
 | Check | Code(s) |
 | --- | --- |

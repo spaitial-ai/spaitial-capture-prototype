@@ -62,7 +62,7 @@ Speculative, so verify with a reprojection test:
 
 ## Sending bundles
 
-The prototype has no network code. Zip the bundle with `CaptureBundleExporter.makeZip(for:)` (or any zipper using stored or deflate compression and no encryption), upload it from your backend following the [beta docs](https://developers.spaitial.ai/docs/beta), and never ship an API key in the app.
+The prototype has no network code. Zip the bundle with `CaptureBundleExporter.makeZip(for:)` (or any zipper using stored or deflate compression and no encryption), send it from your backend as a `capture_bundle` ZIP following the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-zip), and never ship an API key in the app.
 
 ## Things you can safely change
 

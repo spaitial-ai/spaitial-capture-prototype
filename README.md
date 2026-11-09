@@ -2,11 +2,11 @@
 
 A minimal iOS app that scans a space with ARKit and saves an Echo-3 capture bundle on the device: posed JPEG keyframes with their EXIF capture time, one camera pose per frame and one calibration per frame. The exported zip is the input Echo-3 turns into a 3D world.
 
-The capture API is in private beta. If you have access, its docs are at [developers.spaitial.ai/docs/beta](https://developers.spaitial.ai/docs/beta). If not, email [support@spaitial.ai](mailto:support@spaitial.ai).
+The Echo-3 capture API is available to every SpAItial developer account. Its reference is the [capture guide](https://docs.spaitial.ai/api/capture-worlds).
 
 Use it as a reference when you build your own capture app. It has no accounts, no network calls and no analytics. Scans stay on the device until you export them.
 
-The app never submits anything. The exported zip is the `capture_bundle` input, and submission belongs in your backend. See the [beta docs](https://developers.spaitial.ai/docs/beta) (for access, email [support@spaitial.ai](mailto:support@spaitial.ai)).
+The app never submits anything. The exported zip is the `capture_bundle` input, and submission belongs in your backend. Send it as a `capture_bundle` ZIP on `POST /v1/worlds`, as described in the [capture guide](https://docs.spaitial.ai/api/capture-worlds#capture-zip).
 
 ## What it does
 
@@ -76,7 +76,7 @@ npm test
 | [docs/guidance-setups.md](docs/guidance-setups.md) | You're choosing between Core and Full guidance, or porting one of them |
 | [docs/capture-guide.md](docs/capture-guide.md) | You're writing instructions for the people who scan |
 | [docs/porting-guide.md](docs/porting-guide.md) | You're moving this into your own app, or rewriting it on another stack |
-| [Capture API beta docs](https://developers.spaitial.ai/docs/beta) | You're ready to send bundles to Echo-3 from your backend |
+| [Echo-3 capture guide](https://docs.spaitial.ai/api/capture-worlds) | You're ready to send bundles to Echo-3 from your backend |
 | [AGENTS.md](AGENTS.md) | You're a coding agent working in this repo |
 
 A tiny synthetic bundle is in [samples/minimal-bundle](samples/minimal-bundle). It passes validation, but it can't be reconstructed.
@@ -99,7 +99,7 @@ docs/                    format, conventions, pipeline and guides
 
 ## Links
 
-- [Capture API beta docs](https://developers.spaitial.ai/docs/beta) (sign-in required; to request access, email [support@spaitial.ai](mailto:support@spaitial.ai))
+- [Echo-3 capture guide](https://docs.spaitial.ai/api/capture-worlds)
 - [API docs](https://docs.spaitial.ai)
 
 ## License
