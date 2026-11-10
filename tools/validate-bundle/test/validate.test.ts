@@ -165,13 +165,20 @@ test("files outside the layout only warn", () => {
   assert.deepEqual(report.warnings[0]!.details, { paths: ["notes/scan.txt"] });
 });
 
-test("missing required camera files fail", () => {
+test("missing per-frame intrinsics fail", () => {
   const dir = copySample();
   fs.rmSync(path.join(dir, "cameras/per_frame_intrinsics.json"));
+  assert.ok(codes(validateBundle(dir).errors).includes("PER_FRAME_INTRINSICS_MISSING"));
+});
+
+test("a bundle without poses passes with a warning", () => {
+  const dir = copySample();
   fs.rmSync(path.join(dir, "cameras/camera_trajectory.json"));
-  const errors = codes(validateBundle(dir).errors);
-  assert.ok(errors.includes("PER_FRAME_INTRINSICS_MISSING"));
-  assert.ok(errors.includes("TRAJECTORY_MISSING"));
+  const report = validateBundle(dir);
+  assert.deepEqual(report.errors, []);
+  assert.deepEqual(codes(report.warnings), ["POSES_MISSING"]);
+  assert.equal(report.orientation, "identity");
+  assert.equal(report.orientationSource, null);
 });
 
 test("unparseable camera JSON fails", () => {

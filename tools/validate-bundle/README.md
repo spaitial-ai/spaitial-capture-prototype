@@ -32,7 +32,7 @@ Errors use the issue codes from the [capture guide](https://docs.spaitial.ai/api
 | Safe paths: no absolute paths, `..`, symlinks or duplicates | `ZIP_UNSAFE_PATH`, `ZIP_SYMLINK`, `ZIP_DUPLICATE_ENTRY` |
 | 1 to 5,000 images, named `Image_%06d.jpg`, one-based and contiguous | `IMAGES_MISSING`, `TOO_MANY_FRAMES`, `IMAGE_*` |
 | `DateTimeOriginal`, `SubSecTimeOriginal` and `OffsetTimeOriginal` in each JPEG's first 64 KiB, strictly increasing; `Orientation` absent or 1 | `EXIF_*` |
-| `camera_trajectory.json`: N 4×4 matrices, finite, orthonormal rotation, determinant +1, last row `[0,0,0,1]` | `TRAJECTORY_*`, `MATRIX_*`, `ROTATION_*` |
+| `camera_trajectory.json`, when present: N 4×4 matrices, finite, orthonormal rotation, determinant +1, last row `[0,0,0,1]`. Missing poses are a warning (`POSES_MISSING`), not an error | `TRAJECTORY_*`, `MATRIX_*`, `ROTATION_*` |
 | `per_frame_intrinsics.json`: N entries per array, 1920×1440 or 1920×1080, focal length and principal point in range | `PER_FRAME_INTRINSICS_*`, `INTRINSICS_*` |
 | Camera files parse as JSON | `CAMERA_FILE_INVALID_JSON` |
 | Optional `orientation.json` and `camera_intrinsics.json`, when present | `ORIENTATION_*`, `INTRINSICS_*` |

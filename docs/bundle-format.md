@@ -1,6 +1,6 @@
 # Capture bundle format
 
-This is the bundle the prototype writes and Echo-3 accepts as `capture_bundle` input: ordered JPEG frames plus one camera pose and one pinhole calibration per frame, packaged as one ZIP. It is a posed image set, not a video.
+This is the bundle the prototype writes and Echo-3 accepts as `capture_bundle` input: ordered JPEG frames plus one pinhole calibration and, ideally, one camera pose per frame, packaged as one ZIP. It is an image set, not a video.
 
 The authoritative contract is the [capture guide](https://docs.spaitial.ai/api/capture-worlds). This page summarizes it and notes where the prototype makes a choice. Where the two disagree, the capture guide wins.
 
@@ -19,7 +19,7 @@ capture.zip
     └── per_frame_intrinsics.json
 ```
 
-That is everything the prototype writes, and everything Echo-3 needs. Both guidance setups write this same layout. The LiDAR depth and mesh that the Full setup uses for live coaching are never saved.
+That is everything the prototype writes. Echo-3 needs the images and `per_frame_intrinsics.json`. `camera_trajectory.json` is optional but recommended: without it Echo-3 estimates the cameras, and poses make reconstruction more reliable. The prototype always writes it. Both guidance setups write this same layout. The LiDAR depth and mesh that the Full setup uses for live coaching are never saved.
 
 - `images/` and `cameras/` sit at the ZIP root. One wrapper folder is tolerated, so the app's export (`bundle/images/...`) can be sent as is.
 - Two optional files are also accepted: `cameras/orientation.json` (`{ "orientation": ... }`) and `cameras/camera_intrinsics.json` (one shared calibration). The prototype writes neither. When both intrinsics files are present, the per-frame one takes precedence.
@@ -61,7 +61,7 @@ The prototype passes `ARFrame.exifData` through unchanged (`CaptureBundleWriter.
 
 ## `cameras/camera_trajectory.json`
 
-One 4×4 row-major matrix per image, as a JSON array of shape `[N][4][4]`:
+Optional but recommended. One 4×4 row-major matrix per image, as a JSON array of shape `[N][4][4]`:
 
 ```json
 [

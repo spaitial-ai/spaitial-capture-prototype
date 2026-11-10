@@ -79,7 +79,11 @@ export function validateBundleSource(source: BundleSource): BundleReport {
     files: [...byPath.keys()].sort(),
     wrapperFolder: plan.wrapperFolder,
     errors,
-    warnings: [...ignoredPathWarnings(plan.skipped), ...orientationWarnings(result)],
+    warnings: [
+      ...ignoredPathWarnings(plan.skipped),
+      ...poseWarnings(result),
+      ...orientationWarnings(result),
+    ],
     orientation: result.orientation,
     orientationSource: result.orientationSource,
   };
@@ -165,6 +169,18 @@ function ignoredPathWarnings(skipped: CaptureZipSkip[]): ValidationError[] {
       code: "IGNORED_PATHS",
       message: `${outside.length} path(s) outside the layout will be ignored: ${summarize(outside)}`,
       details: { paths: outside },
+    },
+  ];
+}
+
+function poseWarnings(result: PartnerCaptureBundleResult): ValidationError[] {
+  if (result.posed) return [];
+  return [
+    {
+      code: "POSES_MISSING",
+      message:
+        "cameras/camera_trajectory.json is missing, so Echo-3 will estimate the cameras. " +
+        "Include poses for the most reliable reconstruction.",
     },
   ];
 }

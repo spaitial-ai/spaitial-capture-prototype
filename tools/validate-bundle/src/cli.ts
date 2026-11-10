@@ -26,7 +26,7 @@ function printReport(report: BundleReport): void {
   ];
   if (report.wrapperFolder) details.push(`wrapper folder ${report.wrapperFolder}/`);
   if (report.orientation) {
-    details.push(`orientation ${report.orientation} (${report.orientationSource})`);
+    details.push(`orientation ${report.orientation} (${report.orientationSource ?? "no poses, images as stored"})`);
   }
   console.log(`${verdict}: ${details.join(", ")}`);
 }

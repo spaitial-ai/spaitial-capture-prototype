@@ -1,14 +1,17 @@
 /**
  * Validation of an Echo-3 capture bundle.
  *
- * A bundle ships images, `cameras/camera_trajectory.json`, and
- * `cameras/per_frame_intrinsics.json`. `cameras/camera_intrinsics.json` and
- * `cameras/orientation.json` are optional; without the latter the hold
- * orientation is inferred from the trajectory.
+ * A bundle ships images and `cameras/per_frame_intrinsics.json`.
+ * `cameras/camera_trajectory.json` is optional but recommended: without it
+ * Echo-3 estimates the cameras. `cameras/camera_intrinsics.json` and
+ * `cameras/orientation.json` are optional. Without `orientation.json` the hold
+ * orientation is inferred from the trajectory, or is `identity` (images used
+ * as stored) when the bundle has no trajectory.
  */
 
 import { validateCaptureExif, type CaptureFrameExif } from "./exif.js";
 import {
+  CAPTURE_ORIENTATION_IDENTITY,
   voteHoldOrientation,
   type CaptureCameraOrientation,
   type HoldOrientationVote,
@@ -47,9 +50,14 @@ export interface PartnerCaptureBundleResult {
   errors: ValidationError[];
   frameCount: number;
   orientation: CaptureCameraOrientation | null;
-  /** `orientation.json` when the bundle has one, else the trajectory vote. */
+  /**
+   * `orientation.json` when the bundle has one, else the trajectory vote.
+   * `null` with an `identity` orientation for a bundle without poses.
+   */
   orientationSource: "orientation_file" | "trajectory_vote" | null;
   orientationVote: HoldOrientationVote | null;
+  /** `false` when the bundle has no trajectory. */
+  posed: boolean;
 }
 
 export function validatePartnerCaptureBundle(
@@ -72,6 +80,7 @@ export function validatePartnerCaptureBundle(
     errors,
     frameCount,
     ...orientation,
+    posed: input.trajectory !== undefined,
   };
 }
 
@@ -95,9 +104,7 @@ function validateCameraFiles(
   frameCount: number,
 ): ValidationError[] {
   const errors: ValidationError[] = [];
-  if (input.trajectory === undefined) {
-    errors.push(missingFile("TRAJECTORY_MISSING", CAPTURE_TRAJECTORY_PATH));
-  } else {
+  if (input.trajectory !== undefined) {
     errors.push(...validateTrajectory(input.trajectory, frameCount));
   }
 
@@ -148,6 +155,14 @@ function resolveOrientation(
         : null,
       orientationSource: isValid ? "orientation_file" : null,
       orientationVote: vote,
+    };
+  }
+
+  if (input.trajectory === undefined) {
+    return {
+      orientation: CAPTURE_ORIENTATION_IDENTITY,
+      orientationSource: null,
+      orientationVote: null,
     };
   }
 
